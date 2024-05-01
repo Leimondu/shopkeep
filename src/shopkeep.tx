@@ -1,0 +1,61 @@
+Program:
+    'Store' storeName=ID '<'
+        stmts*=Stmt
+    '>'
+;
+
+
+Stmt:
+    PrintStatement | AssignmentStatement 
+    | UpdateStatement | IfStatement | WhileStatement
+;
+
+PrintStatement:
+    'DISPLAY' var=ID 
+;
+
+AssignmentStatement:
+    'STOCK'('NOTE')? var=ID '>>' val=Val
+;
+
+UpdateStatement:
+    'UPDATE' var=ID '>>' expr=Expression
+;
+
+IfStatement:
+    'IF' '(' var=ID compOps=Operators compOpd=Operand ')' '<'
+        stmts*=Stmt
+
+        ('!' '<'els*=elsStmt '>')?
+
+    '>'
+;
+
+elsStmt:
+    stmts*=Stmt
+;
+
+WhileStatement:
+    'WHILE' '(' var=ID compOps=Operators compOpd=Operand ')' '<'
+        stmts*=Stmt
+    '>'
+;
+
+
+
+Expression:
+    opd=Operand (ops=Operators opd=Operand)?
+;
+
+Operand:
+ID | NUMBER
+;
+
+Operators:
+'+' | '-' | '*' | '/' | '%'
+| 'lthan' | 'gthan' | 'leq' | 'geq' | 'eq' | 'neq'
+;
+
+Val:
+    NUMBER | STRING
+;

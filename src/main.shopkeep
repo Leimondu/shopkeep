@@ -1,0 +1,5 @@
+Store MyStore <
+    STOCK var >> "Hello World"
+
+    DISPLAY var
+>
